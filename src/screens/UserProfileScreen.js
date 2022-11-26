@@ -1,18 +1,17 @@
 import { StyleSheet } from "react-native";
 
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
+import { Text, View } from "../components/Themed.js";
 
-export default function TabTwoScreen() {
+export default function UserProfileScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <Text style={styles.title}>First Name</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <Text style={styles.title}> Last Name</Text>
     </View>
   );
 }
