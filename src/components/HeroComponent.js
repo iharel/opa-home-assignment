@@ -1,8 +1,6 @@
-import * as WebBrowser from "expo-web-browser";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Image, StyleSheet } from "react-native";
 
 import Colors from "../constants/Colors";
-import { MonoText } from "./StyledText";
 import { Text, View } from "./Themed";
 
 export default function HeroComponent({ data }) {

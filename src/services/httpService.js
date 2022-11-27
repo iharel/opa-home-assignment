@@ -1,5 +1,5 @@
-import userData from "../constants/userData";
-import homescreenData from "../constants/data";
+import userData from "../mockData/userData";
+import homescreenData from "../mockData/homepageData";
 const service = {};
 const pService = {};
 pService.apiKey = "";
@@ -26,7 +26,7 @@ service.get = async (requestObj) => {
       resolve(data);
     }, 300);
   });
-  //   return await fetch(requestObj.path, { method: "GET", headers: headers });
+  //   *** return await fetch(requestObj.path, { method: "GET", headers: headers });
 
   return await returnMockPromise;
 };

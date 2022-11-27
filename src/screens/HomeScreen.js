@@ -9,10 +9,17 @@ import CONSTS from "../constants/constants";
 import { React } from "react";
 import DataComponent from "../components/DataComponent";
 import { useIsFocused } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 export default function HomeScreen({}) {
   const [hsElementsArray, setHsElementsArray] = useState([]);
-  const isFocused = useIsFocused();
+  const isFocused = useIsFocused(); // When back to focus, we want to refetch data.
+
+  // checking if user conditions are met for the data object:
+  const user = useSelector((state) => {
+    return state.user.user;
+  });
+  userConditionsMet = user.firstName = "David";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,8 +41,10 @@ export default function HomeScreen({}) {
           );
         else if (hsElement?.type === CONSTS.HS_ELEMENT_TYPES.HERO)
           return <HeroComponent key={index} data={hsElement.data} />;
-        else if (hsElement?.type === CONSTS.HS_ELEMENT_TYPES.DATA)
-          return <DataComponent key={index} dataList={hsElement.data} />;
+        else if (hsElement?.type === CONSTS.HS_ELEMENT_TYPES.DATA) {
+          if (userConditionsMet)
+            return <DataComponent key={index} dataList={hsElement.data} />;
+        }
       })}
 
       <View

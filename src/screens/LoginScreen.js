@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
-import { setUser } from "../app/userSlice";
+import { setUser } from "../stateMng/userSlice";
 import userService from "../services/userService";
 import { Text, View } from "../components/Themed.js";
 
