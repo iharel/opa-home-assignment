@@ -1,25 +1,23 @@
 import { useState } from "react";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
-
+import { useDispatch } from "react-redux";
+import { setUser } from "../app/userSlice";
+import userService from "../services/userService";
 import { Text, View } from "../components/Themed.js";
 
 export default function LoginScreen(props) {
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const setAuthorized = (isAuthorized) => {
-    setIsAuthorized(isAuthorized);
-    props.setAuthorized(true);
-  };
+  const dispatch = useDispatch();
   const fetchData = async () => {
     const userData = await userService.authenticateUser(nameText, passText);
     // here we should check if auth succeeded, response.status = 200... in this assignment, the fetch is mocked.
-    setUserData(userData);
+    dispatch(setUser(userData));
 
     return () => {
       // unmount logic
       console.debug("unmount");
     };
   };
-  fetchData();
+
   const [passText, onChangePassText] = useState("");
   const [nameText, onChangeNameText] = useState("");
 
@@ -46,7 +44,7 @@ export default function LoginScreen(props) {
       />
       <TouchableOpacity
         onPress={() => {
-          setAuthorized(true);
+          fetchData();
         }}>
         <Text style={styles.btn}>Submit</Text>
       </TouchableOpacity>

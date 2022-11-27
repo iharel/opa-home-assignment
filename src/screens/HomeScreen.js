@@ -8,21 +8,23 @@ import { Text, View } from "../components/Themed.js";
 import CONSTS from "../constants/constants";
 import { React } from "react";
 import DataComponent from "../components/DataComponent";
+import { useIsFocused } from "@react-navigation/native";
 
-export default function HomeScreen() {
+export default function HomeScreen({}) {
   const [hsElementsArray, setHsElementsArray] = useState([]);
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     const fetchData = async () => {
       const hsElementsArray = await homeService.getHomeElementsData();
       setHsElementsArray(hsElementsArray);
-
       return () => {
         // unmount logic
         console.debug("unmount");
       };
     };
-    fetchData();
-  }, []);
+    isFocused && fetchData();
+  }, [isFocused]);
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {hsElementsArray.map((hsElement, index) => {

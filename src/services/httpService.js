@@ -21,7 +21,6 @@ service.get = async (requestObj) => {
     headers["x-api-key"] = requestObj.apiKey;
     headers["x-api-secret"] = requestObj.apiSecret;
   }
-  console.debug("BEEN EHRasfE");
   const returnMockPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);

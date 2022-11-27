@@ -10,8 +10,8 @@ export default function HeroComponent({ data }) {
   return (
     <View>
       <View style={styles.heroContainer}>
+        <Text style={styles.getStartedText}>Hero element</Text>
         <Text style={styles.getStartedText}>{data.title}</Text>
-
         <Image style={styles.tinyLogo} source={{ uri: data.imgUrl }} />
       </View>
     </View>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "black",
-    marginTop: 15,
+    // marginTop: 15,
   },
   getStartedText: {
     fontSize: 17,

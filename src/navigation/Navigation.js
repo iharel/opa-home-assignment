@@ -7,6 +7,8 @@ import {
   NavigationContainer,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useSelector, useDispatch } from "react-redux";
+
 import { Text } from "../components/Themed";
 import LoginScreen from "../screens/LoginScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
@@ -14,10 +16,12 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import HomeScreen from "../screens/HomeScreen";
 
 export default function Navigation({ colorScheme }) {
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const setAuthorized = (isAuthorized) => {
-    setIsAuthorized(isAuthorized);
-  };
+  const user = useSelector((state) => {
+    console.debug(state);
+    return state.user.user;
+  });
+  let isAuthorized = false;
+  if (user) isAuthorized = true;
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
@@ -25,7 +29,7 @@ export default function Navigation({ colorScheme }) {
       {isAuthorized ? (
         <RootNavigator isAuthorized={isAuthorized} />
       ) : (
-        <LoginScreen setAuthorized={setAuthorized} />
+        <LoginScreen />
       )}
     </NavigationContainer>
   );
