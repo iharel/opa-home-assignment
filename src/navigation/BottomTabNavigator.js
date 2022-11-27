@@ -54,7 +54,7 @@ function HomeScreenNavigator() {
       <HomeScreenStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerTitle: "Tab One Title" }}
+        options={{ headerTitle: "Home Screen" }}
       />
     </HomeScreenStack.Navigator>
   );
@@ -68,7 +68,7 @@ function UserProfileNavigator() {
       <UserProfileStack.Screen
         name="UserProfileScreen"
         component={UserProfileScreen}
-        options={{ headerTitle: "Tab Two Title" }}
+        options={{ headerTitle: "User Profile" }}
       />
     </UserProfileStack.Navigator>
   );

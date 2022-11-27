@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
-
+import Colors from "../constants/Colors";
 export const SLIDER_WIDTH = Dimensions.get("window").width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
@@ -29,20 +29,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
+    backgroundColor: "black",
   },
   image: {
     width: ITEM_WIDTH,
     height: 300,
   },
   header: {
-    color: "#222",
+    color: Colors.primary.color,
     fontSize: 28,
     fontWeight: "bold",
     paddingLeft: 20,
     paddingTop: 20,
   },
   body: {
-    color: "#222",
+    color: Colors.primary.color,
+    backgroundColor: "black",
     fontSize: 18,
     paddingLeft: 20,
     paddingLeft: 20,

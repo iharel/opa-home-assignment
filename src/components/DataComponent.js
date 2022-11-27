@@ -1,81 +1,52 @@
-import * as WebBrowser from "expo-web-browser";
-import { StyleSheet, TouchableOpacity } from "react-native";
-
-import Colors from "../src/constants/Colors";
-import { MonoText } from "./StyledText";
+import { StyleSheet, Image } from "react-native";
+import CONSTS from "../constants/constants";
+import CarouselComponent from "../components/CarouselComponent";
+import HeroComponent from "../components/HeroComponent";
+import Color from "../constants/Colors";
 import { Text, View } from "./Themed";
 
-export default function EditScreenInfo({ path }) {
+export default function DataComponent({ dataList }) {
   return (
-    <View>
-      <View style={styles.getStartedContainer}>
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Open up the code for this screen:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
-        </View>
-
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Change any of the text, save the file, and your app will automatically
-          update.
-        </Text>
-      </View>
-
-      <View style={styles.helpContainer}>
-        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making
-            changes
-          </Text>
-        </TouchableOpacity>
-      </View>
+    <View style={styles.container}>
+      <Text>DATA OBJECT</Text>
+      {dataList.map((dataObj, index) => {
+        if (dataObj?.type === CONSTS.HS_ELEMENT_TYPES.CAROUSEL)
+          return <CarouselComponent key={index} carouselData={dataObj.data} />;
+        else if (dataObj?.type === CONSTS.HS_ELEMENT_TYPES.HERO)
+          return <HeroComponent key={index} data={dataObj.data} />;
+        else if (dataObj?.type === CONSTS.HS_ELEMENT_TYPES.TEXT)
+          return (
+            <Text key={index} style={styles.text}>
+              {dataObj.data}{" "}
+            </Text>
+          );
+        else if (dataObj?.type === CONSTS.HS_ELEMENT_TYPES.IMAGE) {
+          console.debug(dataObj);
+          return (
+            <Image
+              key={index}
+              style={styles.image}
+              source={{ uri: dataObj.data }}
+            />
+          );
+        }
+      })}
     </View>
   );
 }
 
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    "https://docs.expo.dev/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet"
-  );
-}
-
 const styles = StyleSheet.create({
-  getStartedContainer: {
-    alignItems: "center",
-    marginHorizontal: 50,
+  image: {
+    width: 300,
+    height: 300,
   },
-  homeScreenFilename: {
-    marginVertical: 7,
+  text: {
+    color: Color.primary.color,
   },
-  codeHighlightContainer: {
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    lineHeight: 24,
-    textAlign: "center",
-  },
-  helpContainer: {
-    marginTop: 15,
-    marginHorizontal: 20,
-    alignItems: "center",
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    textAlign: "center",
+  container: {
+    // flex: 1,
+    // alignItems: "center",
+    backgroundColor: "black",
+    // padding: 8,
   },
 });

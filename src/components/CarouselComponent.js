@@ -1,7 +1,8 @@
 // import * as WebBrowser from "expo-web-browser";
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Carousel from "react-native-snap-carousel";
+import Colors from "../constants/Colors.js";
 import CarouselCardItem, {
   SLIDER_WIDTH,
   ITEM_WIDTH,
@@ -12,20 +13,24 @@ const CarouselCards = (props) => {
   const isCarousel = React.useRef(null);
   console.debug(props.carouselData);
   return (
-    <View>
+    <View style={styles.carouselContainer}>
       <Carousel
         // layout="tinder"
-        layoutCardOffset={0}
+        layoutCardOffset={1}
         ref={isCarousel}
         data={props.carouselData}
         renderItem={CarouselCardItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
-        inactiveSlideShift={0}
+        inactiveSlideShift={1}
         useScrollView={true}
       />
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  carouselContainer: {
+    backgroundColor: "black",
+  },
+});
 export default CarouselCards;

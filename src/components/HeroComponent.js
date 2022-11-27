@@ -9,13 +9,8 @@ export default function HeroComponent({ data }) {
   console.debug(data);
   return (
     <View>
-      <View style={styles.getStartedContainer}>
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          {data.title}
-        </Text>
+      <View style={styles.heroContainer}>
+        <Text style={styles.getStartedText}>{data.title}</Text>
 
         <Image style={styles.tinyLogo} source={{ uri: data.imgUrl }} />
       </View>
@@ -24,13 +19,21 @@ export default function HeroComponent({ data }) {
 }
 
 const styles = StyleSheet.create({
+  heroContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    marginTop: 15,
+  },
   getStartedText: {
     fontSize: 17,
     lineHeight: 24,
     textAlign: "center",
+    color: Colors.primary.color,
   },
   tinyLogo: {
-    width: 50,
-    height: 50,
+    width: 150,
+    height: 150,
   },
 });

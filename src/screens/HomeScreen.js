@@ -1,27 +1,39 @@
 import { ScrollView, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import homeService from "../services/homeService";
 import CarouselComponent from "../components/CarouselComponent";
 import HeroComponent from "../components/HeroComponent";
 
-import hsElementsArray from "../constants/data";
 import { Text, View } from "../components/Themed.js";
+import CONSTS from "../constants/constants";
 import { React } from "react";
-const HS_ELEMENT_TYPES = {
-  CAROUSEL: "CAROUSEL",
-  HERO: "HERO",
-  DATA: "DATA",
-};
+import DataComponent from "../components/DataComponent";
+
 export default function HomeScreen() {
+  const [hsElementsArray, setHsElementsArray] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const hsElementsArray = await homeService.getHomeElementsData();
+      setHsElementsArray(hsElementsArray);
+
+      return () => {
+        // unmount logic
+        console.debug("unmount");
+      };
+    };
+    fetchData();
+  }, []);
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {hsElementsArray.map((hsElement, index) => {
-        if (hsElement?.type === HS_ELEMENT_TYPES.CAROUSEL)
+        if (hsElement?.type === CONSTS.HS_ELEMENT_TYPES.CAROUSEL)
           return (
             <CarouselComponent key={index} carouselData={hsElement.data} />
           );
-        else if (hsElement?.type === HS_ELEMENT_TYPES.HERO)
-          return <HeroComponent data={hsElement.data} />;
-        else if (hsElement?.type === HS_ELEMENT_TYPES.DATA) return <></>;
+        else if (hsElement?.type === CONSTS.HS_ELEMENT_TYPES.HERO)
+          return <HeroComponent key={index} data={hsElement.data} />;
+        else if (hsElement?.type === CONSTS.HS_ELEMENT_TYPES.DATA)
+          return <DataComponent key={index} dataList={hsElement.data} />;
       })}
 
       <View
@@ -35,9 +47,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
+    backgroundColor: "black",
   },
   title: {
     fontSize: 20,
